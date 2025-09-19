@@ -1,17 +1,23 @@
 package main
 
-// type Divisable map[int]bool
-
-// func (s Divisable) has(num int) bool {
-// 	_, ok := s[num]
-// 	return ok
-// }
+import "fmt"
 
 func main() {
-	rightnumbers := Divisable{}
+	limit := 1000
+	valid := rangeUntil(limit)
+	fmt.Printf("Sum of numbers divisable until %d = %d\n", limit, sumAll(valid))
 }
 
-func IsMultipleOf3Or5(number int) bool {
+func rangeUntil(number int) (valid []int) {
+	for i := 0; i < number; i++ {
+		if isMultipleOf3Or5(i) {
+			valid = append(valid, i)
+		}
+	}
+	return
+}
+
+func isMultipleOf3Or5(number int) bool {
 	switch {
 	case number < 3:
 		return false
@@ -19,6 +25,14 @@ func IsMultipleOf3Or5(number int) bool {
 		return true
 	case number%5 == 0:
 		return true
+	default:
+		return false
 	}
-	return true
+}
+
+func sumAll(numbers []int) (sum int) {
+	for _, num := range numbers {
+		sum += num
+	}
+	return
 }
